@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         character = GetComponent<CharacterController>();
+        score = 0;
+        health = 5;
     }
 
     // Update is called once per frame
@@ -41,6 +44,11 @@ public class PlayerController : MonoBehaviour
 		{
             health--;
             Debug.Log("Health: " + health);
+            if (health == 0)
+			{
+                Debug.Log("Game Over!");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
         if (other.gameObject.CompareTag("Goal"))
